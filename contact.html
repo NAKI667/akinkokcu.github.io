@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İletişim - Akın Kökçü</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Ana Sayfa</a></li>
+            <li><a href="about.html">Hakkımda</a></li>
+            <li><a href="projects.html">Projeler</a></li>
+            <li><a href="contact.html">İletişim</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section>
+        <h1>Bağlantı Kanalları</h1>
+        <p>Benimle dijital ağlar üzerinden irtibat kurabilir veya aşağıdaki güvenli formu kullanabilirsiniz.</p>
+
+        <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin: 30px 0;">
+            
+            <a href="https://www.linkedin.com/in/akin-kokcu" target="_blank" class="project-link" style="text-align: center; min-width: 150px;">
+                <span style="font-size: 1.5em; display: block; margin-bottom: 5px;">🔗</span>
+                LinkedIn Profili
+            </a>
+
+            <a href="https://github.com/NAKI667" target="_blank" class="project-link" style="text-align: center; min-width: 150px;">
+                <span style="font-size: 1.5em; display: block; margin-bottom: 5px;">💻</span>
+                GitHub Repoları
+            </a>
+
+            <a href="https://www.instagram.com/akin_kokcu/" target="_blank" class="project-link" style="text-align: center; min-width: 150px;">
+                <span style="font-size: 1.5em; display: block; margin-bottom: 5px;">📸</span>
+                Instagram (NAKI)
+            </a>
+
+        </div>
+    </section>
+
+    <hr style="border-color: #333; margin: 30px 0;">
+
+    <section>
+        <h1>Mesaj Gönder & Lokasyon</h1>
+        
+        <div class="contact-section">
+            
+            <div class="contact-col">
+                <h3>📩 Şifreli Mesaj Gönder</h3>
+                <form action="https://formspree.io/f/mqarokba" method="POST">
+                    
+                    <label>Kod Adınız:</label>
+                    <input type="text" name="name" required placeholder="İsim...">
+
+                    <label>Dönüş Adresi:</label>
+                    <input type="email" name="_replyto" required placeholder="Email...">
+
+                    <label>İletiniz:</label>
+                    <textarea name="message" rows="5" required placeholder="Mesajınız..."></textarea>
+
+                    <button type="submit" class="cyber-btn">🚀 Gönder</button>
+                </form>
+            </div>
+
+            <div class="contact-col">
+                <h3>📍 Üs Konumu</h3>
+                <div class="map-responsive">
+                    <iframe 
+                        width="100%" 
+                        height="100%" 
+                        frameborder="0" 
+                        scrolling="no" 
+                        marginheight="0" 
+                        marginwidth="0" 
+                        src="https://maps.google.com/maps?q=Piri+Reis+Universitesi+Deniz+Kampusu&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                        style="filter: invert(90%) hue-rotate(180deg);">
+                    </iframe>
+                </div>
+                <p style="text-align: center; margin-top: 10px; font-size: 0.8em;">Piri Reis Üniversitesi, Deniz Kampüsü</p>
+            </div>
+
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>© 2025 Akın Kökçü | NAKI Security Systems</p>
+</footer>
+
+</body>
+</html>
