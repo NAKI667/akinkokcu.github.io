@@ -46,20 +46,20 @@ This portfolio is built with a minimalist approach—no heavy frameworks, just p
 
 To run this base locally on your machine:
 
-
 # 1. Clone the repository
+
 ```bash
 git clone [https://github.com/NAKI667/akinkokcu.github.io.git](https://github.com/NAKI667/akinkokcu.github.io.git)
-```bash
-# 2. Navigate to directory
+```
+2. Navigate to directory
 ```bash
 cd akinkokcu.github.io
-```bash
+```
 # 3. Open index.html
-# Launch in any modern browser 
-👤 OPERATOR INFO
+* Launch in any modern browser
 
-Akın Kökçü (NAKI)
+# 👤 OPERATOR INFO
+## Akın Kökçü (NAKI)
 
 - 🎯 Objective: To bridge the gap between Technical Security and Management Strategy.
 
