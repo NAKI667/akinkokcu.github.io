@@ -8,6 +8,82 @@
 </head>
 <body>
 
+<!-- ===== ERİŞİLEBİLİRLİK SİSTEMİ (Sadece HTML + CSS) ===== -->
+<!-- Gizli Kontrol Elemanları -->
+<input type="checkbox" id="a11y-panel-toggle" class="a11y-state">
+<input type="checkbox" id="a11y-contrast" class="a11y-state">
+<input type="checkbox" id="a11y-links" class="a11y-state">
+<input type="checkbox" id="a11y-readable" class="a11y-state">
+<input type="checkbox" id="a11y-no-anim" class="a11y-state">
+<input type="radio" name="a11y-cb" id="a11y-cb-none" class="a11y-state" checked>
+<input type="radio" name="a11y-cb" id="a11y-cb-prot" class="a11y-state">
+<input type="radio" name="a11y-cb" id="a11y-cb-deut" class="a11y-state">
+<input type="radio" name="a11y-cb" id="a11y-cb-trit" class="a11y-state">
+<input type="radio" name="a11y-cb" id="a11y-cb-achr" class="a11y-state">
+<input type="radio" name="a11y-fs" id="a11y-fs-normal" class="a11y-state" checked>
+<input type="radio" name="a11y-fs" id="a11y-fs-large" class="a11y-state">
+<input type="radio" name="a11y-fs" id="a11y-fs-xlarge" class="a11y-state">
+
+<!-- Erişilebilirlik Paneli -->
+<div id="a11y-panel">
+    <label for="a11y-panel-toggle" class="a11y-fab" title="Erişilebilirlik Ayarları" aria-label="Erişilebilirlik Panelini Aç">♿</label>
+    <div class="a11y-menu">
+        <div class="a11y-header">
+            <span>♿ Erişilebilirlik</span>
+            <label for="a11y-panel-toggle" class="a11y-close">&times;</label>
+        </div>
+        <div class="a11y-section">
+            <span class="a11y-label">📏 Yazı Boyutu</span>
+            <div class="a11y-options">
+                <label for="a11y-fs-normal" class="a11y-opt">Normal</label>
+                <label for="a11y-fs-large" class="a11y-opt">Büyük</label>
+                <label for="a11y-fs-xlarge" class="a11y-opt">Çok Büyük</label>
+            </div>
+        </div>
+        <div class="a11y-section">
+            <span class="a11y-label">🎨 Renk Körü Modu</span>
+            <div class="a11y-options a11y-options-col">
+                <label for="a11y-cb-none" class="a11y-opt">Kapalı</label>
+                <label for="a11y-cb-prot" class="a11y-opt">Protanopi (Kırmızı Körlük)</label>
+                <label for="a11y-cb-deut" class="a11y-opt">Deuteranopi (Yeşil Körlük)</label>
+                <label for="a11y-cb-trit" class="a11y-opt">Tritanopi (Mavi Körlük)</label>
+                <label for="a11y-cb-achr" class="a11y-opt">Akromatopsi (Tam Renk Körlüğü)</label>
+            </div>
+        </div>
+        <div class="a11y-section">
+            <label for="a11y-contrast" class="a11y-toggle">🔲 Yüksek Kontrast</label>
+        </div>
+        <div class="a11y-section">
+            <label for="a11y-links" class="a11y-toggle">🔗 Bağlantıları Vurgula</label>
+        </div>
+        <div class="a11y-section">
+            <label for="a11y-readable" class="a11y-toggle">📖 Okunabilir Font (Disleksi Dostu)</label>
+        </div>
+        <div class="a11y-section">
+            <label for="a11y-no-anim" class="a11y-toggle">⏸️ Animasyonları Durdur</label>
+        </div>
+    </div>
+</div>
+
+<!-- SVG Renk Körü Filtreleri -->
+<svg class="a11y-svg" aria-hidden="true">
+    <defs>
+        <filter id="a11y-protanopia">
+            <feColorMatrix type="matrix" values="0.567 0.433 0 0 0 0.558 0.442 0 0 0 0 0.242 0.758 0 0 0 0 0 1 0"/>
+        </filter>
+        <filter id="a11y-deuteranopia">
+            <feColorMatrix type="matrix" values="0.625 0.375 0 0 0 0.7 0.3 0 0 0 0 0.3 0.7 0 0 0 0 0 1 0"/>
+        </filter>
+        <filter id="a11y-tritanopia">
+            <feColorMatrix type="matrix" values="0.95 0.05 0 0 0 0 0.433 0.567 0 0 0 0.475 0.525 0 0 0 0 0 1 0"/>
+        </filter>
+        <filter id="a11y-achromatopsia">
+            <feColorMatrix type="matrix" values="0.299 0.587 0.114 0 0 0.299 0.587 0.114 0 0 0.299 0.587 0.114 0 0 0 0 0 1 0"/>
+        </filter>
+    </defs>
+</svg>
+<!-- ===== ERİŞİLEBİLİRLİK SİSTEMİ SONU ===== -->
+
 <header>
     <nav>
         <ul>

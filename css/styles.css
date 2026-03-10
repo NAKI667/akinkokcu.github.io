@@ -278,3 +278,342 @@ input:focus, textarea:focus {
     border-color: #00ff41;
     color: #000;
 }
+
+/* =========================================
+   ERİŞİLEBİLİRLİK SİSTEMİ (Sadece CSS)
+   Engelli bireyler için kullanılabilirlik
+   ========================================= */
+
+/* Gizli kontrol elemanları (checkbox/radio hack) */
+.a11y-state {
+    position: fixed !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* SVG filtreleri gizle */
+.a11y-svg {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+/* Erişilebilirlik Panel Konteyneri */
+#a11y-panel {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 10000;
+}
+
+/* FAB (Yuvarlak Erişilebilirlik Butonu) */
+.a11y-fab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #111;
+    border: 2px solid #00ff41;
+    color: #fff;
+    font-size: 28px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 255, 65, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-decoration: none;
+}
+.a11y-fab:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 255, 65, 0.5);
+    text-decoration: none;
+}
+
+/* Panel Menüsü (Varsayılan: Gizli) */
+.a11y-menu {
+    position: absolute;
+    bottom: 70px;
+    left: 0;
+    width: 300px;
+    max-height: 80vh;
+    overflow-y: auto;
+    background: rgba(10, 10, 10, 0.97);
+    border: 1px solid #00ff41;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 255, 65, 0.15);
+    transform: translateY(20px);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.3s, opacity 0.3s, visibility 0.3s;
+}
+
+/* Panel Açık Durumu */
+#a11y-panel-toggle:checked ~ #a11y-panel .a11y-menu {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Panel Başlık */
+.a11y-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #333;
+    color: #00ff41;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.a11y-close {
+    color: #888;
+    font-size: 24px;
+    cursor: pointer;
+    line-height: 1;
+    text-decoration: none;
+    padding: 0 5px;
+}
+.a11y-close:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Panel Bölüm */
+.a11y-section {
+    padding: 12px 20px;
+    border-bottom: 1px solid #222;
+}
+
+.a11y-label {
+    display: block;
+    color: #ccc;
+    font-size: 0.85em;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+/* Seçenek Butonları (Radio) */
+.a11y-options {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+.a11y-options-col {
+    flex-direction: column;
+}
+
+.a11y-opt {
+    display: inline-block;
+    padding: 6px 12px;
+    background: #1a1a1a;
+    border: 1px solid #444;
+    border-radius: 4px;
+    color: #aaa;
+    font-size: 0.8em;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+    text-align: center;
+}
+.a11y-opt:hover {
+    border-color: #00ff41;
+    color: #fff;
+}
+
+/* Toggle Etiketleri (Checkbox) */
+.a11y-toggle {
+    display: block;
+    padding: 8px 0;
+    color: #aaa;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.a11y-toggle:hover {
+    color: #fff;
+}
+
+/* ===== AKTİF DURUM GÖSTERGELERİ ===== */
+
+/* Yazı boyutu - aktif buton */
+#a11y-fs-normal:checked ~ #a11y-panel label[for="a11y-fs-normal"],
+#a11y-fs-large:checked ~ #a11y-panel label[for="a11y-fs-large"],
+#a11y-fs-xlarge:checked ~ #a11y-panel label[for="a11y-fs-xlarge"] {
+    background: #00ff41;
+    color: #000;
+    border-color: #00ff41;
+    font-weight: bold;
+}
+
+/* Renk körü modu - aktif buton */
+#a11y-cb-none:checked ~ #a11y-panel label[for="a11y-cb-none"],
+#a11y-cb-prot:checked ~ #a11y-panel label[for="a11y-cb-prot"],
+#a11y-cb-deut:checked ~ #a11y-panel label[for="a11y-cb-deut"],
+#a11y-cb-trit:checked ~ #a11y-panel label[for="a11y-cb-trit"],
+#a11y-cb-achr:checked ~ #a11y-panel label[for="a11y-cb-achr"] {
+    background: #00ff41;
+    color: #000;
+    border-color: #00ff41;
+    font-weight: bold;
+}
+
+/* Checkbox toggle'lar aktif durumu */
+#a11y-contrast:checked ~ #a11y-panel label[for="a11y-contrast"],
+#a11y-links:checked ~ #a11y-panel label[for="a11y-links"],
+#a11y-readable:checked ~ #a11y-panel label[for="a11y-readable"],
+#a11y-no-anim:checked ~ #a11y-panel label[for="a11y-no-anim"] {
+    color: #00ff41;
+    font-weight: bold;
+}
+#a11y-contrast:checked ~ #a11y-panel label[for="a11y-contrast"]::after,
+#a11y-links:checked ~ #a11y-panel label[for="a11y-links"]::after,
+#a11y-readable:checked ~ #a11y-panel label[for="a11y-readable"]::after,
+#a11y-no-anim:checked ~ #a11y-panel label[for="a11y-no-anim"]::after {
+    content: " ✓";
+}
+
+/* =========================================
+   ERİŞİLEBİLİRLİK ETKİLERİ
+   ========================================= */
+
+/* --- YAZI BOYUTU --- */
+#a11y-fs-large:checked ~ header,
+#a11y-fs-large:checked ~ main,
+#a11y-fs-large:checked ~ footer {
+    font-size: 1.25em;
+}
+#a11y-fs-xlarge:checked ~ header,
+#a11y-fs-xlarge:checked ~ main,
+#a11y-fs-xlarge:checked ~ footer {
+    font-size: 1.5em;
+}
+
+/* --- RENK KÖRÜ MODLARI (SVG Filtre) --- */
+#a11y-cb-prot:checked ~ header,
+#a11y-cb-prot:checked ~ main,
+#a11y-cb-prot:checked ~ footer {
+    filter: url(#a11y-protanopia);
+}
+#a11y-cb-deut:checked ~ header,
+#a11y-cb-deut:checked ~ main,
+#a11y-cb-deut:checked ~ footer {
+    filter: url(#a11y-deuteranopia);
+}
+#a11y-cb-trit:checked ~ header,
+#a11y-cb-trit:checked ~ main,
+#a11y-cb-trit:checked ~ footer {
+    filter: url(#a11y-tritanopia);
+}
+#a11y-cb-achr:checked ~ header,
+#a11y-cb-achr:checked ~ main,
+#a11y-cb-achr:checked ~ footer {
+    filter: url(#a11y-achromatopsia);
+}
+
+/* --- YÜKSEK KONTRAST --- */
+#a11y-contrast:checked ~ header {
+    background: #000 !important;
+    border-bottom-color: #fff !important;
+}
+#a11y-contrast:checked ~ header nav ul li a {
+    color: #fff !important;
+}
+#a11y-contrast:checked ~ header nav ul li a:hover {
+    background: #fff !important;
+    color: #000 !important;
+}
+#a11y-contrast:checked ~ main {
+    background: #000 !important;
+    color: #fff !important;
+    border-color: #fff !important;
+}
+#a11y-contrast:checked ~ main h1,
+#a11y-contrast:checked ~ main h2,
+#a11y-contrast:checked ~ main h3 {
+    color: #ff0 !important;
+}
+#a11y-contrast:checked ~ main a {
+    color: #ff0 !important;
+}
+#a11y-contrast:checked ~ main .project-card {
+    background: #000 !important;
+    border-color: #fff !important;
+}
+#a11y-contrast:checked ~ main .contact-col {
+    background: #000 !important;
+    border-color: #fff !important;
+}
+#a11y-contrast:checked ~ main .tech-tag {
+    color: #ff0 !important;
+    border-color: #ff0 !important;
+}
+#a11y-contrast:checked ~ footer {
+    background: #000 !important;
+    color: #fff !important;
+    border-top-color: #fff !important;
+}
+
+/* --- BAĞLANTI VURGULAMA --- */
+#a11y-links:checked ~ header a,
+#a11y-links:checked ~ main a,
+#a11y-links:checked ~ footer a {
+    background-color: #ffff00 !important;
+    color: #000 !important;
+    text-decoration: underline !important;
+    padding: 1px 4px !important;
+    border-radius: 2px;
+    outline: 2px solid #ffff00 !important;
+}
+
+/* --- OKUNABİLİR FONT --- */
+#a11y-readable:checked ~ header,
+#a11y-readable:checked ~ main,
+#a11y-readable:checked ~ footer {
+    font-family: 'Arial', 'Helvetica Neue', 'Helvetica', sans-serif !important;
+    letter-spacing: 0.03em;
+    word-spacing: 0.08em;
+}
+#a11y-readable:checked ~ main {
+    line-height: 1.9 !important;
+}
+#a11y-readable:checked ~ main p,
+#a11y-readable:checked ~ main li,
+#a11y-readable:checked ~ main span {
+    letter-spacing: 0.04em;
+    word-spacing: 0.1em;
+}
+
+/* --- ANİMASYONLARI DURDUR --- */
+#a11y-no-anim:checked ~ header,
+#a11y-no-anim:checked ~ header *,
+#a11y-no-anim:checked ~ main,
+#a11y-no-anim:checked ~ main *,
+#a11y-no-anim:checked ~ footer,
+#a11y-no-anim:checked ~ footer * {
+    animation: none !important;
+    transition: none !important;
+}
+#a11y-no-anim:checked ~ main video {
+    display: none;
+}
+
+/* Erişilebilirlik Panel Responsive */
+@media screen and (max-width: 600px) {
+    .a11y-menu {
+        width: 260px;
+    }
+    #a11y-panel {
+        bottom: 15px;
+        left: 15px;
+    }
+    .a11y-fab {
+        width: 48px;
+        height: 48px;
+        font-size: 24px;
+    }
+}
