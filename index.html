@@ -23,6 +23,10 @@
 <input type="radio" name="a11y-fs" id="a11y-fs-normal" class="a11y-state" checked>
 <input type="radio" name="a11y-fs" id="a11y-fs-large" class="a11y-state">
 <input type="radio" name="a11y-fs" id="a11y-fs-xlarge" class="a11y-state">
+<input type="checkbox" id="a11y-sr-mode" class="a11y-state">
+
+<!-- İçeriğe Atla Linki (Klavye Kullanıcıları İçin) -->
+<a href="#main-content" class="skip-to-content">Ana İçeriğe Atla</a>
 
 <!-- Erişilebilirlik Paneli -->
 <div id="a11y-panel">
@@ -62,6 +66,9 @@
         <div class="a11y-section">
             <label for="a11y-no-anim" class="a11y-toggle">⏸️ Animasyonları Durdur</label>
         </div>
+        <div class="a11y-section">
+            <label for="a11y-sr-mode" class="a11y-toggle">🔊 Ekran Okuyucu Modu (Gorme Engelli)</label>
+        </div>
     </div>
 </div>
 
@@ -84,8 +91,8 @@
 </svg>
 <!-- ===== ERİŞİLEBİLİRLİK SİSTEMİ SONU ===== -->
 
-<header>
-    <nav>
+<header role="banner">
+    <nav aria-label="Ana Navigasyon">
         <ul>
             <li><a href="index.html">Ana Sayfa</a></li>
             <li><a href="about.html">Hakkımda</a></li>
@@ -95,7 +102,8 @@
     </nav>
 </header>
 
-<main>
+<main id="main-content" role="main" aria-label="Ana Icerik">
+    <span class="sr-only sr-desc">Bu sayfa Akin Kokcu'nun kisisel web sitesinin ana sayfasidir. Hos geldiniz mesaji, tanitim videosu ve GitHub istatistikleri yer almaktadir.</span>
     <section>
         <h1>Hoşgeldiniz Agent!</h1>
         <p>Ben Akın Kökçü (NAKI). Piri Reis Üniversitesi Yönetim Bilişim Sistemleri öğrencisi ve Siber Güvenlik tutkunuyum. Bu platform benim dijital karargahımdır.</p>
@@ -107,7 +115,7 @@
         <h2>Siber Vizyon</h2>
         <div style="border-radius: 8px; border: 1px solid #00ff41; overflow: hidden; box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);">
             
-            <video width="100%" height="auto" autoplay muted loop playsinline style="display: block;">
+            <video width="100%" height="auto" autoplay muted loop playsinline style="display: block;" aria-label="Siber guvenlik tanitim videosu">
                 <source src="images/cyber.mp4" type="video/mp4">
                 Tarayıcınız video etiketini desteklemiyor.
             </video>
@@ -142,7 +150,7 @@
 
 </main>
 
-<footer>
+<footer role="contentinfo">
     <p>&copy; 2025 Akın Kökçü | NAKI Security Systems</p>
 </footer>
 
