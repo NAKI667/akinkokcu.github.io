@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akın Kökçü - Siber Güvenlik & YBS</title>
+    <title>Akın Kökçü | Siber Güvenlik ve YBS Portföyü</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/theme.css">
 </head>
 <body>
 
-<!-- ===== ERİŞİLEBİLİRLİK SİSTEMİ (Sadece HTML + CSS) ===== -->
-<!-- Gizli Kontrol Elemanları -->
 <input type="checkbox" id="a11y-panel-toggle" class="a11y-state">
 <input type="checkbox" id="a11y-contrast" class="a11y-state">
 <input type="checkbox" id="a11y-links" class="a11y-state">
@@ -25,10 +24,8 @@
 <input type="radio" name="a11y-fs" id="a11y-fs-xlarge" class="a11y-state">
 <input type="checkbox" id="a11y-sr-mode" class="a11y-state">
 
-<!-- İçeriğe Atla Linki (Klavye Kullanıcıları İçin) -->
 <a href="#main-content" class="skip-to-content">Ana İçeriğe Atla</a>
 
-<!-- Erişilebilirlik Paneli -->
 <div id="a11y-panel">
     <label for="a11y-panel-toggle" class="a11y-fab" title="Erişilebilirlik Ayarları" aria-label="Erişilebilirlik Panelini Aç">♿</label>
     <div class="a11y-menu">
@@ -48,10 +45,10 @@
             <span class="a11y-label">🎨 Renk Körü Modu</span>
             <div class="a11y-options a11y-options-col">
                 <label for="a11y-cb-none" class="a11y-opt">Kapalı</label>
-                <label for="a11y-cb-prot" class="a11y-opt">Protanopi (Kırmızı Körlük)</label>
-                <label for="a11y-cb-deut" class="a11y-opt">Deuteranopi (Yeşil Körlük)</label>
-                <label for="a11y-cb-trit" class="a11y-opt">Tritanopi (Mavi Körlük)</label>
-                <label for="a11y-cb-achr" class="a11y-opt">Akromatopsi (Tam Renk Körlüğü)</label>
+                <label for="a11y-cb-prot" class="a11y-opt">Protanopi</label>
+                <label for="a11y-cb-deut" class="a11y-opt">Deuteranopi</label>
+                <label for="a11y-cb-trit" class="a11y-opt">Tritanopi</label>
+                <label for="a11y-cb-achr" class="a11y-opt">Akromatopsi</label>
             </div>
         </div>
         <div class="a11y-section">
@@ -61,18 +58,17 @@
             <label for="a11y-links" class="a11y-toggle">🔗 Bağlantıları Vurgula</label>
         </div>
         <div class="a11y-section">
-            <label for="a11y-readable" class="a11y-toggle">📖 Okunabilir Font (Disleksi Dostu)</label>
+            <label for="a11y-readable" class="a11y-toggle">📖 Okunabilir Font</label>
         </div>
         <div class="a11y-section">
             <label for="a11y-no-anim" class="a11y-toggle">⏸️ Animasyonları Durdur</label>
         </div>
         <div class="a11y-section">
-            <label for="a11y-sr-mode" class="a11y-toggle">🔊 Ekran Okuyucu Modu (Gorme Engelli)</label>
+            <label for="a11y-sr-mode" class="a11y-toggle">🔊 Ekran Okuyucu Modu</label>
         </div>
     </div>
 </div>
 
-<!-- SVG Renk Körü Filtreleri -->
 <svg class="a11y-svg" aria-hidden="true">
     <defs>
         <filter id="a11y-protanopia">
@@ -89,12 +85,11 @@
         </filter>
     </defs>
 </svg>
-<!-- ===== ERİŞİLEBİLİRLİK SİSTEMİ SONU ===== -->
 
 <header role="banner">
     <nav aria-label="Ana Navigasyon">
         <ul>
-            <li><a href="index.html">Ana Sayfa</a></li>
+            <li><a href="index.html" aria-current="page">Ana Sayfa</a></li>
             <li><a href="about.html">Hakkımda</a></li>
             <li><a href="projects.html">Projeler</a></li>
             <li><a href="contact.html">İletişim</a></li>
@@ -102,86 +97,119 @@
     </nav>
 </header>
 
-<main id="main-content" role="main" aria-label="Ana Icerik">
-    <span class="sr-only sr-desc">Bu sayfa Akin Kokcu'nun kisisel web sitesinin ana sayfasidir. Hos geldiniz mesaji, tanitim videosu ve GitHub istatistikleri yer almaktadir.</span>
-    <section>
-        <h1>Hoşgeldiniz Agent!</h1>
-        <p>Ben Akın Kökçü (NAKI). Piri Reis Üniversitesi Yönetim Bilişim Sistemleri öğrencisi ve Siber Güvenlik tutkunuyum. Bu platform benim dijital karargahımdır.</p>
-    </section>
+<main id="main-content" class="page-shell" role="main" aria-label="Ana İçerik">
+    <span class="sr-only sr-desc">Bu sayfa Akın Kökçü'nün ana portföy vitrini, GitHub teknoloji ağı ve güncel çalışma eksenlerini içerir.</span>
 
-    <hr style="border-color: #333; margin: 30px 0;">
-
-    <section>
-        <h2>Siber Vizyon</h2>
-        <div style="border-radius: 8px; border: 1px solid #00ff41; overflow: hidden; box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);">
-            
-            <video width="100%" height="auto" autoplay muted loop playsinline style="display: block;" aria-label="Siber guvenlik tanitim videosu">
-                <source src="images/cyber.mp4" type="video/mp4">
-                Tarayıcınız video etiketini desteklemiyor.
-            </video>
-
+    <section class="page-hero hero-landing">
+        <div class="hero-visual-card">
+            <div class="hero-image-card">
+                <div class="hero-image-media" aria-hidden="true"></div>
+                <div class="hero-image-overlay">
+                    <p class="eyebrow">Akın Kökçü | NAKI</p>
+                    <h1>Akın Kökçü</h1>
+                    <div class="hero-tag-row">
+                        <span class="chip">Cybersecurity</span>
+                        <span class="chip">Network Systems</span>
+                        <span class="chip">Simulation</span>
+                        <span class="chip">Open Source</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <p style="font-size: 0.8em; color: #666; margin-top: 10px; text-align: center;">
-            *Güvenli yerel bağlantı sağlandı.
-        </p>
-    </section>
 
-    <hr style="border-color: #333; margin: 30px 0;">
+        <aside class="hero-dashboard">
+            <div class="hero-stats-grid">
+                <article class="stat-card stat-card--compact">
+                    <span class="stat-label">Açık Repo</span>
+                    <span class="stat-value" id="repo-count">...</span>
+                </article>
 
-    <section id="github-stats">
-        <h2>Canlı Veri Akışı (GitHub)</h2>
-        <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 20px;">
-            
-            <div style="background: #222; padding: 20px; border-radius: 8px; width: 150px; text-align: center; border: 1px solid #444;">
-                <span style="font-size: 3em; color: #00ff41; font-weight: bold; display: block;" id="repo-count">...</span>
-                <span style="color: #aaa;">Public Repos</span>
+                <article class="stat-card stat-card--compact">
+                    <span class="stat-label">Takipçi</span>
+                    <span class="stat-value" id="follower-count">...</span>
+                </article>
+
+                <article class="stat-card stat-card--compact">
+                    <span class="stat-label">Teknoloji Sayısı</span>
+                    <span class="stat-value" id="tech-total">...</span>
+                </article>
             </div>
 
-            <div style="background: #222; padding: 20px; border-radius: 8px; width: 150px; text-align: center; border: 1px solid #444;">
-                <span style="font-size: 3em; color: #00ff41; font-weight: bold; display: block;" id="follower-count">...</span>
-                <span style="color: #aaa;">Followers</span>
-            </div>
-
-        </div>
-        <p style="text-align: center; font-size: 0.8em; color: #666; margin-top: 15px;">
-            Veriler <a href="https://github.com/NAKI667" target="_blank">@NAKI667</a> GitHub API üzerinden anlık çekilmektedir.
-        </p>
+            <article class="surface-card hero-compact-panel">
+                <h2>Güncel odak alanları</h2>
+                <div class="chip-cloud stack-sm">
+                    <span class="chip">Unity Gemi Simülasyonu</span>
+                    <span class="chip">Ağ ve Sistem</span>
+                    <span class="chip">AI / Computer Vision</span>
+                    <span class="chip">Raspberry Pi</span>
+                </div>
+                <div class="cta-row">
+                    <a href="projects.html" class="project-link project-link--primary">Projeleri İncele</a>
+                    <a href="contact.html" class="project-link">İletişime Geç</a>
+                </div>
+            </article>
+        </aside>
     </section>
 
+    <section class="section-block">
+        <div class="section-heading">
+            <div>
+                <p class="eyebrow">Profesyonel Profil</p>
+                <h2>Odak alanları</h2>
+            </div>
+        </div>
+
+        <div class="info-grid">
+            <article class="surface-card mini-card">
+                <h3>Akademik Geçmiş</h3>
+                <p>DGS ile geçtiğim Piri Reis Üniversitesi'nde %100 İngilizce MIS eğitimi alırken Doğuş Üniversitesi'ndeki bilgi güvenliği altyapımı daha geniş bir sistem bakışıyla birleştiriyorum.</p>
+            </article>
+
+            <article class="surface-card mini-card">
+                <h3>Teknik Yetkinlikler</h3>
+                <p>Python, Linux, TCP/IP, ağ temelleri, Fortigate, Splunk, temel sunucu yönetimi ve SQL tarafında gelişen bir çalışma düzenim var.</p>
+            </article>
+
+            <article class="surface-card mini-card">
+                <h3>Proje Odağı</h3>
+                <p>Frontend, otomasyon, simülasyon, gömülü sistemler ve security operations yaklaşımını aynı üretim çizgisinde buluşturan projeler geliştiriyorum.</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="section-block">
+        <div class="section-heading">
+            <div>
+                <p class="eyebrow">GitHub Verileri</p>
+                <h2>Proje ve teknoloji ağı</h2>
+            </div>
+            <p>GitHub projelerimden alınan teknoloji verileri etkileşimli bir ağ yapısında sunulur. Repo düğümlerine tıklayabilir, teknoloji başlıklarına odaklanabilirsin.</p>
+        </div>
+
+        <div class="network-shell">
+            <div class="network-stage">
+                <div id="network-status" class="network-status" aria-live="polite">GitHub verisi yükleniyor...</div>
+                <svg id="github-network" class="network-canvas" viewBox="0 0 920 620" role="img" aria-label="GitHub repo ve teknoloji ağı"></svg>
+            </div>
+
+            <aside class="network-detail" id="network-detail">
+                <p class="eyebrow">Detay</p>
+                <h3 id="network-title">GitHub teknoloji ağı</h3>
+                <p id="network-description">Seçilen repo ya da teknoloji başlığının detayları burada yer alır.</p>
+                <div id="network-tags" class="chip-cloud stack-sm"></div>
+                <a id="network-link" href="#" target="_blank" rel="noreferrer" class="project-link" hidden>Repo'ya Git</a>
+            </aside>
+        </div>
+    </section>
 </main>
 
 <footer role="contentinfo">
-    <p>&copy; 2025 Akın Kökçü | NAKI Security Systems</p>
+    <div class="footer-inner">
+        <p>&copy; 2025 Akın Kökçü | NAKI Security Systems</p>
+    </div>
 </footer>
 
-<script>
-    // GitHub API'sinden veri çekme fonksiyonu
-    async function getGithubStats() {
-        const username = 'NAKI667';
-        const repoElement = document.getElementById('repo-count');
-        const followerElement = document.getElementById('follower-count');
-
-        try {
-            const response = await fetch(`https://api.github.com/users/${username}`);
-            
-            if (!response.ok) throw new Error('Veri alınamadı');
-            
-            const data = await response.json();
-            
-            // Veriyi ekrana yaz
-            repoElement.innerText = data.public_repos;
-            followerElement.innerText = data.followers;
-            
-        } catch (error) {
-            console.error('API Hatası:', error);
-            repoElement.innerText = "X";
-            followerElement.innerText = "X";
-        }
-    }
-
-    // Sayfa yüklendiğinde fonksiyonu çalıştır
-    getGithubStats();
-</script>
+<script src="js/github-network.js"></script>
 
 </body>
 </html>
