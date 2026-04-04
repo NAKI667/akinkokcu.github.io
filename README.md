@@ -1,71 +1,80 @@
-# 🌐 NAKI DIGITAL HQ | Cyber Security & MIS Portfolio
+# Akın Kökçü Portfolio
 
-> **"Data is the new oil, but Privacy is the engine."**
+Akın Kökçü'nün siber güvenlik, ağ sistemleri, yönetim bilişim sistemleri ve açık kaynak geliştirme odağını bir araya getiren kişisel portföy projesidir. Site; akademik geçmişi, teknik yetkinlikleri, projeleri ve iletişim kanallarını modern, çok sayfalı bir yapıda sunar.
 
-## /// MISSION STATUS: ONLINE 🟢
-Welcome to the digital headquarters of **Akın Kökçü (NAKI)**. 
-This platform serves as a central hub for my academic studies in **Management Information Systems (MIS)**, my passion for **Cyber Security**, and my open-source development projects.
+Canlı yayın: [naki667.github.io](https://naki667.github.io/)
 
-The site is designed with a **"Dark Mode / Terminal"** aesthetic, reflecting my focus on command-line operations and system security.
+## Proje Özeti
 
-🔗 **Live Access:** [naki667.github.io](https://naki667.github.io/)
+Bu portföy, sade bir statik yapı üzerine kurulmuştur ve içerik sunumunu ön planda tutar. Ana sayfada GitHub verilerinden beslenen etkileşimli proje-teknoloji ağı, hakkımda sayfasında eğitim ve yetkinlik odaklı içerik, projeler sayfasında seçili çalışmalar ve iletişim sayfasında sosyal bağlantılar ile Formspree tabanlı mesaj formu yer alır.
 
----
+## Öne Çıkan Özellikler
 
-## ⚡ SYSTEM FEATURES
+- Çok sayfalı yapı: `index.html`, `about.html`, `projects.html`, `contact.html`
+- Modern ve responsive arayüz
+- GitHub API ile çalışan etkileşimli repo ve teknoloji ağı
+- Sertifika ve teknik yetkinlik sunumu
+- Formspree ile çalışan iletişim formu
+- Erişilebilirlik paneli ve klavye dostu gezinme
 
-* **Cyberpunk Aesthetics:** Custom CSS styling inspired by terminal interfaces and neon HUDs.
-* **Responsive Core:** Fully adaptive layout using CSS Grid & Flexbox (Mobile/Desktop compatible).
-* **Project Showcase:** A dynamic grid displaying active "Operations" (Projects).
-* **Secure Contact:** Integrated Formspree for encrypted messaging and location intelligence.
+## Sayfa Yapısı
 
----
+### Ana Sayfa
 
-## 📂 FEATURED OPERATIONS
+- Görsel ağırlıklı karşılama alanı
+- Güncel odak alanları
+- GitHub verilerinden oluşturulan etkileşimli teknoloji ağı
 
-| Project | Type | Status | Description |
-| :--- | :--- | :--- | :--- |
-| **[Ghost Market UI](https://github.com/NAKI667/ghost-market-ui)** | `Front-End` | 🟢 Active | Privacy-focused e-commerce concept with dynamic cart logic. |
-| **[Çakırın Mekanı](https://github.com/NAKI667/Python_Projelerim)** | `Python` | 🟢 Active | Automation script for system management. |
-| **[PSM (Secure Manager)](https://github.com/NAKI667/PSM)** | `Security` | 🟡 Dev | Personal security manager and cryptography tool. |
+### Hakkımda
 
----
+- Eğitim geçmişi
+- Kariyer hedefi
+- Teknik yetkinlik alanları
+- Dil bilgisi ve sertifikalar
 
-## 🛠 TECH ARSENAL
+### Projeler
 
-This portfolio is built with a minimalist approach—no heavy frameworks, just pure performance.
+- Unity tabanlı gemi simülasyonu projesi
+- Ghost Market UI
+- Çakırın Mekanı
+- PSM (Secure Manager)
+- NAKI Portföy (V1)
 
-* **Core:** HTML5, CSS3 (Custom Variables)
-* **Scripting:** Vanilla JavaScript (GitHub API Integration)
-* **Version Control:** Git & GitHub Pages
-* **Tools:** VS Code, Linux/Kali Environment
+### İletişim
 
----
+- LinkedIn, GitHub ve Instagram bağlantıları
+- Formspree tabanlı iletişim formu
+- Akademik aidiyet bilgisi
 
-## 🚀 DEPLOYMENT INTEL
+## Kullanılan Teknolojiler
 
-To run this base locally on your machine:
+- HTML5
+- CSS3
+- Vanilla JavaScript
+- GitHub API
+- Formspree
+- Git ve GitHub Pages
 
-# 1. Clone the repository
+## Yerel Olarak Çalıştırma
 
 ```bash
-git clone [https://github.com/NAKI667/akinkokcu.github.io.git](https://github.com/NAKI667/akinkokcu.github.io.git)
-```
-2. Navigate to directory
-```bash
+git clone https://github.com/NAKI667/akinkokcu.github.io.git
 cd akinkokcu.github.io
 ```
-# 3. Open index.html
-* Launch in any modern browser
 
-# 👤 OPERATOR INFO
-## Akın Kökçü (NAKI)
+Ardından `index.html` dosyasını modern bir tarayıcıda açabilirsiniz.
 
-- 🎯 Objective: To bridge the gap between Technical Security and Management Strategy.
+## Notlar
 
-- 🎓 Education: Piri Reis University (MIS)
+- GitHub teknoloji ağı, GitHub API üzerinden canlı veri çekerek çalışır.
+- İletişim formu mevcut Formspree yapılandırmasını kullanır.
+- Site statik yapıdadır; ek bir backend servis içermez.
 
-- 🛡️ Focus: Network Security, OSINT, Front-End Development
-[LinkedIn](https://www.linkedin.com/in/akin-kokcu) | [GitHub](https://github.com/NAKI667)
----
-© 2025 NAKI Security Systems. All rights reserved.
+## İletişim
+
+- LinkedIn: [linkedin.com/in/akin-kokcu](https://www.linkedin.com/in/akin-kokcu/)
+- GitHub: [github.com/NAKI667](https://github.com/NAKI667)
+
+## Lisans
+
+Bu repo kişisel portföy amacıyla kullanılmaktadır.
