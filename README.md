@@ -38,11 +38,11 @@ This portfolio is built on a simple static structure with a focus on clear conte
 
 ### Projeler / Projects
 
-- Unity tabanlı gemi simülasyonu projesi / Unity-based ship simulation project
+- Unity tabanlı gemi simülasyonu prototipi / Unity-based ship simulation prototype
 - Ghost Market UI
 - Çakırın Mekanı
-- PSM (Secure Manager)
-- NAKI Portföy (V1) / NAKI Portfolio (V1)
+- PSM Parola Yöneticisi / PSM Password Manager
+- NAKI Portföy Sitesi / NAKI Portfolio Website
 
 ### İletişim / Contact
 

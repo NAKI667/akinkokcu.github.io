@@ -546,6 +546,90 @@ footer p {
     line-height: 1.6;
 }
 
+.project-feed-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.project-feed-status {
+    color: var(--accent-strong);
+    font-size: 0.94rem;
+    line-height: 1.7;
+}
+
+.project-feed-status--error {
+    color: #ffd1d1;
+}
+
+.project-card--live {
+    gap: 14px;
+}
+
+.project-card--empty {
+    min-height: auto;
+}
+
+.project-card__header,
+.project-card__actions,
+.project-card__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.project-card__header {
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.project-card__header .eyebrow,
+.project-feed-head .chip-cloud {
+    margin: 0;
+}
+
+.project-card__badges {
+    justify-content: flex-end;
+}
+
+.project-card__actions {
+    margin-top: auto;
+}
+
+.project-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin: 0;
+}
+
+.project-meta-item {
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.project-meta-item dt {
+    margin-bottom: 8px;
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+}
+
+.project-meta-item dd {
+    margin: 0;
+    color: var(--text);
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
 .tech-stack,
 .chip-cloud {
     display: flex;
@@ -577,6 +661,12 @@ footer p {
     color: var(--accent-strong);
     font-size: 0.84rem;
     font-weight: 600;
+}
+
+.tech-tag--muted {
+    color: var(--text);
+    border-color: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.03);
 }
 
 .timeline {
@@ -1342,6 +1432,10 @@ textarea:focus {
 
     .cta-row {
         flex-direction: column;
+    }
+
+    .project-meta-grid {
+        grid-template-columns: 1fr;
     }
 
     .project-link,

@@ -1,19 +1,13 @@
-(function () {
+(function (global) {
     "use strict";
 
     var username = "NAKI667";
-    var featuredRepos = [
-        { name: "ghost-market-ui", label: "Ghost Market UI" },
-        { name: "Python_Projelerim", label: "Çakırın Mekanı" },
-        { name: "PSM", label: "PSM" },
-        { name: "akinkokcu.github.io", label: "NAKI Portföy" }
-    ];
-
     var svg = document.getElementById("github-network");
-    if (!svg) {
+    if (!svg || !global.GitHubPortfolioData) {
         return;
     }
 
+    var networkStage = svg.closest(".network-stage");
     var statusEl = document.getElementById("network-status");
     var titleEl = document.getElementById("network-title");
     var descriptionEl = document.getElementById("network-description");
@@ -22,7 +16,6 @@
     var repoCountEl = document.getElementById("repo-count");
     var followerCountEl = document.getElementById("follower-count");
     var techTotalEl = document.getElementById("tech-total");
-
     var SVG_NS = "http://www.w3.org/2000/svg";
 
     function setStatus(message, isError) {
@@ -36,11 +29,9 @@
     }
 
     function hideStatus() {
-        if (!statusEl) {
-            return;
+        if (statusEl) {
+            statusEl.hidden = true;
         }
-
-        statusEl.hidden = true;
     }
 
     function createSvgElement(tagName, attributes) {
@@ -63,39 +54,41 @@
     }
 
     function setDetail(title, description, tags, link, linkLabel) {
-        titleEl.textContent = title;
-        descriptionEl.textContent = description;
+        if (titleEl) {
+            titleEl.textContent = title;
+        }
 
-        clearNode(tagsEl);
-        (tags || []).forEach(function (tag) {
-            var chip = document.createElement("span");
-            chip.className = "chip";
-            chip.textContent = tag;
-            tagsEl.appendChild(chip);
-        });
+        if (descriptionEl) {
+            descriptionEl.textContent = description;
+        }
+
+        if (tagsEl) {
+            clearNode(tagsEl);
+            (tags || []).forEach(function (tag) {
+                var chip = document.createElement("span");
+                chip.className = "chip";
+                chip.textContent = tag;
+                tagsEl.appendChild(chip);
+            });
+        }
+
+        if (!linkEl) {
+            return;
+        }
 
         if (link) {
             linkEl.hidden = false;
             linkEl.href = link;
-            linkEl.textContent = linkLabel || "Repo'ya Git";
+            linkEl.textContent = linkLabel || "Repo'yu Aç";
         } else {
             linkEl.hidden = true;
             linkEl.removeAttribute("href");
         }
     }
 
-    function fetchJson(url) {
-        return fetch(url).then(function (response) {
-            if (!response.ok) {
-                throw new Error("GitHub verisi alınamadı");
-            }
-
-            return response.json();
-        });
-    }
-
     function splitLabel(label, maxLength) {
-        var words = label.split(" ");
+        var prepared = String(label || "").replace(/[._-]+/g, " ").trim();
+        var words = prepared.split(/\s+/).filter(Boolean);
         var lines = [];
         var current = "";
 
@@ -116,25 +109,28 @@
             lines.push(label);
         }
 
-        return lines.slice(0, 2);
+        return lines.slice(0, 3);
     }
 
-    function formatRepoDescription(repo, languages) {
-        var updatedText = "";
+    function formatRepoDescription(repo) {
+        var technologies = repo.technologies.map(function (item) { return item.label; }).slice(0, 6);
+        var segments = [];
 
-        if (repo.updated_at) {
-            updatedText = new Date(repo.updated_at).toLocaleDateString("tr-TR", {
-                year: "numeric",
-                month: "long",
-                day: "numeric"
-            });
+        if (technologies.length) {
+            segments.push("Teknolojiler: " + technologies.join(", "));
+        } else {
+            segments.push("Bu repo için görünür teknoloji verisi henüz alınamadı.");
         }
 
-        if (!languages.length) {
-            return "Bu repo için görünür teknoloji verisi alınamadı.";
+        segments.push("İzleyici: " + global.GitHubPortfolioData.compactNumber(repo.watchersCount));
+        segments.push("Fork: " + global.GitHubPortfolioData.compactNumber(repo.forksCount));
+        segments.push("Açık issue: " + global.GitHubPortfolioData.compactNumber(repo.openIssuesCount));
+
+        if (repo.pushedAt || repo.updatedAt) {
+            segments.push("Son güncelleme: " + global.GitHubPortfolioData.formatDate(repo.pushedAt || repo.updatedAt));
         }
 
-        return "Öne çıkan teknolojiler: " + languages.join(", ") + (updatedText ? ". Son güncelleme: " + updatedText + "." : ".");
+        return segments.join(" | ");
     }
 
     function selectNode(activeId, nodes, edges) {
@@ -155,19 +151,78 @@
         });
     }
 
+    function assignRingPositions(items, config) {
+        var maxPerRing = config.maxPerRing;
+        var ringCount = Math.max(1, Math.ceil(items.length / maxPerRing));
+
+        for (var ringIndex = 0; ringIndex < ringCount; ringIndex += 1) {
+            var start = ringIndex * maxPerRing;
+            var group = items.slice(start, start + maxPerRing);
+            var radiusX = config.baseRadiusX + (ringIndex * config.ringGapX);
+            var radiusY = config.baseRadiusY + (ringIndex * config.ringGapY);
+
+            group.forEach(function (item, index) {
+                var angle = (Math.PI * 2 * index) / group.length - (Math.PI / 2);
+                item.x = config.centerX + Math.cos(angle) * radiusX;
+                item.y = config.centerY + Math.sin(angle) * radiusY;
+            });
+        }
+
+        return {
+            ringCount: ringCount,
+            outerRadiusX: config.baseRadiusX + ((ringCount - 1) * config.ringGapX),
+            outerRadiusY: config.baseRadiusY + ((ringCount - 1) * config.ringGapY)
+        };
+    }
+
     function buildGraph(profile, repos, technologies) {
         clearNode(svg);
 
-        var width = 920;
-        var height = 620;
+        var techLayout = assignRingPositions(technologies, {
+            centerX: 0,
+            centerY: 0,
+            baseRadiusX: 310,
+            baseRadiusY: 220,
+            ringGapX: 95,
+            ringGapY: 82,
+            maxPerRing: 16
+        });
+        assignRingPositions(repos, {
+            centerX: 0,
+            centerY: 0,
+            baseRadiusX: 190,
+            baseRadiusY: 140,
+            ringGapX: 72,
+            ringGapY: 56,
+            maxPerRing: 10
+        });
+        var width = Math.max(920, (techLayout.outerRadiusX + 190) * 2);
+        var height = Math.max(620, (techLayout.outerRadiusY + 180) * 2);
         var centerX = width / 2;
         var centerY = height / 2;
-        var repoRadius = 190;
-        var techRadius = 285;
         var allNodes = [];
         var allEdges = [];
         var lineLayer = createSvgElement("g", { class: "network-lines" });
         var nodeLayer = createSvgElement("g", { class: "network-nodes" });
+
+        svg.setAttribute("viewBox", "0 0 " + width + " " + height);
+        if (networkStage) {
+            networkStage.style.minHeight = Math.round(height) + "px";
+        }
+
+        repos.forEach(function (repo) {
+            repo.x += centerX;
+            repo.y += centerY;
+            repo.id = "repo-" + repo.name;
+            repo.connections = repo.technologies.map(function (technology) { return "tech-" + technology.slug; }).concat(["user"]);
+        });
+
+        technologies.forEach(function (technology) {
+            technology.x += centerX;
+            technology.y += centerY;
+            technology.id = "tech-" + technology.slug;
+            technology.connections = technology.repos.map(function (repo) { return "repo-" + repo.name; });
+        });
 
         svg.appendChild(lineLayer);
         svg.appendChild(nodeLayer);
@@ -175,29 +230,12 @@
         var userNode = {
             id: "user",
             type: "user",
-            label: "NAKI",
+            label: profile.login || username,
             x: centerX,
             y: centerY,
             size: 58,
-            connections: repos.map(function (repo) { return "repo-" + repo.name; }),
-            description: "GitHub üzerindeki portföy merkezini temsil eden ana düğüm. Bağlı repolar ve kullanılan teknolojiler dinamik olarak çekilir."
+            connections: repos.map(function (repo) { return repo.id; })
         };
-
-        repos.forEach(function (repo, index) {
-            var angle = (Math.PI * 2 * index) / repos.length - Math.PI / 2;
-            repo.x = centerX + Math.cos(angle) * repoRadius;
-            repo.y = centerY + Math.sin(angle) * repoRadius;
-            repo.id = "repo-" + repo.name;
-            repo.connections = repo.languages.map(function (language) { return "tech-" + language.slug; }).concat(["user"]);
-        });
-
-        technologies.forEach(function (technology, index) {
-            var angle = (Math.PI * 2 * index) / technologies.length - Math.PI / 2;
-            technology.x = centerX + Math.cos(angle) * techRadius;
-            technology.y = centerY + Math.sin(angle) * techRadius;
-            technology.id = "tech-" + technology.slug;
-            technology.connections = technology.repos.map(function (repo) { return "repo-" + repo.name; });
-        });
 
         repos.forEach(function (repo) {
             var userEdge = createSvgElement("line", {
@@ -211,9 +249,9 @@
             lineLayer.appendChild(userEdge);
             allEdges.push({ from: "user", to: repo.id, element: userEdge });
 
-            repo.languages.forEach(function (language) {
-                var tech = technologies.find(function (item) { return item.slug === language.slug; });
-                if (!tech) {
+            repo.technologies.forEach(function (technology) {
+                var techNode = technologies.find(function (item) { return item.slug === technology.slug; });
+                if (!techNode) {
                     return;
                 }
 
@@ -221,12 +259,12 @@
                     class: "network-link-line network-link-line--tech",
                     x1: repo.x,
                     y1: repo.y,
-                    x2: tech.x,
-                    y2: tech.y
+                    x2: techNode.x,
+                    y2: techNode.y
                 });
 
                 lineLayer.appendChild(repoEdge);
-                allEdges.push({ from: repo.id, to: tech.id, element: repoEdge });
+                allEdges.push({ from: repo.id, to: techNode.id, element: repoEdge });
             });
         });
 
@@ -237,11 +275,9 @@
                 role: "button",
                 transform: "translate(" + nodeData.x + " " + nodeData.y + ")"
             });
-
             var circle = createSvgElement("circle", {
-                r: nodeData.size || (nodeData.type === "tech" ? 24 : 34)
+                r: nodeData.size || 28
             });
-
             var text = createSvgElement("text", {
                 class: "network-label",
                 "text-anchor": "middle",
@@ -251,7 +287,7 @@
             labelLines.forEach(function (line, index) {
                 var tspan = createSvgElement("tspan", {
                     x: "0",
-                    dy: index === 0 ? "0" : "1.1em"
+                    dy: index === 0 ? "0" : "1.08em"
                 });
                 tspan.textContent = line;
                 text.appendChild(tspan);
@@ -268,10 +304,10 @@
 
                 if (nodeData.type === "user") {
                     setDetail(
-                        "GitHub Portföy Ağı",
-                        "GitHub üzerinde yer alan öne çıkan repolar ve bu repolarda görünen teknolojiler arasındaki ilişkiyi gösterir.",
-                        repos.map(function (repo) { return repo.label; }),
-                        profile.html_url,
+                        "GitHub Portföy Ağacı",
+                        "Profildeki tüm açık repolar ve bu repolarda algılanan teknolojiler canlı GitHub verisiyle otomatik çizilir.",
+                        repos.map(function (repo) { return repo.name; }),
+                        profile.htmlUrl,
                         "GitHub Profiline Git"
                     );
                     return;
@@ -280,34 +316,31 @@
                 if (nodeData.type === "repo") {
                     setDetail(
                         nodeData.label,
-                        formatRepoDescription(nodeData.raw, nodeData.languages.map(function (item) { return item.label; })),
-                        nodeData.languages.map(function (item) { return item.label; }),
-                        nodeData.raw.html_url,
+                        formatRepoDescription(nodeData.raw),
+                        nodeData.raw.technologies.map(function (item) { return item.label; }),
+                        nodeData.raw.htmlUrl,
                         "Repo'yu Aç"
                     );
                     return;
                 }
 
-                if (nodeData.type === "tech") {
-                    setDetail(
-                        nodeData.label,
-                        "Bu teknoloji GitHub ağında " + nodeData.repos.length + " repo ile bağlantılı görünüyor.",
-                        nodeData.repos.map(function (repo) { return repo.label; }),
-                        null,
-                        ""
-                    );
-                }
+                setDetail(
+                    nodeData.label,
+                    "Bu teknoloji şu anda " + nodeData.repos.length + " repo ile bağlantılı görünüyor.",
+                    nodeData.repos.map(function (repo) { return repo.label; }),
+                    null,
+                    ""
+                );
             }
 
             group.addEventListener("mouseenter", activate);
             group.addEventListener("focus", activate);
             group.addEventListener("click", function () {
                 activate();
-                if (nodeData.type === "repo" && nodeData.raw && nodeData.raw.html_url) {
-                    window.open(nodeData.raw.html_url, "_blank", "noopener");
+                if (nodeData.type === "repo" && nodeData.raw && nodeData.raw.htmlUrl) {
+                    global.open(nodeData.raw.htmlUrl, "_blank", "noopener");
                 }
             });
-
             group.addEventListener("keydown", function (event) {
                 if (event.key === "Enter" || event.key === " ") {
                     event.preventDefault();
@@ -316,20 +349,19 @@
             });
         }
 
-        attachNode(userNode, ["NAKI", "GitHub"]);
+        attachNode(userNode, splitLabel(profile.login || username, 12));
 
         repos.forEach(function (repo) {
             attachNode({
                 id: repo.id,
                 type: "repo",
-                label: repo.label,
-                raw: repo.raw,
+                label: repo.name,
+                raw: repo,
                 x: repo.x,
                 y: repo.y,
                 size: 34,
-                languages: repo.languages,
                 connections: repo.connections
-            }, splitLabel(repo.label, 13));
+            }, splitLabel(repo.name, 13));
         });
 
         technologies.forEach(function (technology) {
@@ -346,107 +378,38 @@
         });
 
         setDetail(
-            "GitHub Portföy Ağı",
-            "Merkez düğümden repolara, repolardan kullanılan teknolojilere uzanan ilişki ağını inceleyebilirsin.",
-            repos.map(function (repo) { return repo.label; }),
-            profile.html_url,
+            "GitHub Portföy Ağacı",
+            "Yeni bir public repo açıldığında ve GitHub teknoloji verisi oluştuğunda bu ağ görünümüne otomatik olarak eklenir.",
+            repos.map(function (repo) { return repo.name; }),
+            profile.htmlUrl,
             "GitHub Profiline Git"
         );
         selectNode("user", allNodes, allEdges);
     }
 
-    function normalizeLanguages(languageMap) {
-        var entries = Object.keys(languageMap).map(function (key) {
-            return { label: key, value: languageMap[key] };
-        });
+    setStatus("GitHub verisi yükleniyor...", false);
 
-        entries.sort(function (left, right) {
-            return right.value - left.value;
-        });
-
-        return entries.slice(0, 3).map(function (entry) {
-            return {
-                label: entry.label,
-                slug: entry.label.toLowerCase().replace(/[^a-z0-9]+/g, "-")
-            };
-        });
-    }
-
-    Promise.all([
-        fetchJson("https://api.github.com/users/" + username),
-        fetchJson("https://api.github.com/users/" + username + "/repos?per_page=100&sort=updated")
-    ]).then(function (results) {
-        var profile = results[0];
-        var repos = results[1];
-        var repoLookup = new Map();
-
-        repos.forEach(function (repo) {
-            repoLookup.set(repo.name.toLowerCase(), repo);
-        });
-
-        var selectedRepos = featuredRepos.map(function (meta) {
-            var repo = repoLookup.get(meta.name.toLowerCase());
-            if (!repo) {
-                return null;
-            }
-
-            return {
-                name: repo.name,
-                label: meta.label,
-                raw: repo
-            };
-        }).filter(Boolean);
-
-        if (!selectedRepos.length) {
-            throw new Error("Gösterilecek repo bulunamadı");
+    global.GitHubPortfolioData.loadPortfolio(username).then(function (data) {
+        if (repoCountEl) {
+            repoCountEl.textContent = data.stats.repoCount;
         }
 
-        repoCountEl.textContent = profile.public_repos;
-        followerCountEl.textContent = profile.followers;
+        if (followerCountEl) {
+            followerCountEl.textContent = data.profile.followers;
+        }
 
-        return Promise.all(selectedRepos.map(function (repoMeta) {
-            return fetchJson(repoMeta.raw.languages_url).then(function (languageMap) {
-                return {
-                    name: repoMeta.name,
-                    label: repoMeta.label,
-                    raw: repoMeta.raw,
-                    languages: normalizeLanguages(languageMap)
-                };
-            });
-        })).then(function (repoNodes) {
-            var technologyMap = new Map();
+        if (techTotalEl) {
+            techTotalEl.textContent = data.stats.technologyCount;
+        }
 
-            repoNodes.forEach(function (repoNode) {
-                repoNode.languages.forEach(function (language) {
-                    if (!technologyMap.has(language.slug)) {
-                        technologyMap.set(language.slug, {
-                            slug: language.slug,
-                            label: language.label,
-                            repos: []
-                        });
-                    }
-
-                    technologyMap.get(language.slug).repos.push({
-                        name: repoNode.name,
-                        label: repoNode.label
-                    });
-                });
-            });
-
-            var technologies = Array.from(technologyMap.values()).sort(function (left, right) {
-                return right.repos.length - left.repos.length;
-            });
-
-            techTotalEl.textContent = technologies.length;
-            buildGraph(profile, repoNodes, technologies);
-            hideStatus();
-        });
+        buildGraph(data.profile, data.repos, data.technologies);
+        hideStatus();
     }).catch(function (error) {
         console.error(error);
         setStatus("GitHub verisi yüklenemedi. Ağ görünümü şu anda kullanılamıyor.", true);
         setDetail(
             "GitHub verisi yüklenemedi",
-            "API erişimi veya oran limiti nedeniyle repo ve teknoloji ağı hazırlanamadı. Daha sonra yeniden deneyebilirsin.",
+            "API erişimi veya oran limiti nedeniyle repo ve teknoloji ağacı hazırlanamadı. Daha sonra yeniden deneyebilirsin.",
             ["GitHub API", "Bekleyen veri"],
             "https://github.com/" + username,
             "GitHub Profiline Git"
@@ -464,4 +427,4 @@
             techTotalEl.textContent = "X";
         }
     });
-})();
+})(window);

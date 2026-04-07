@@ -104,79 +104,54 @@
         <div class="hero-copy">
             <p class="eyebrow">Projeler</p>
             <h1>Projelerim</h1>
-            <p class="lead">Açık kaynak araçlar, arayüz denemeleri, simülasyon geliştirme ve güvenlik odaklı çalışmalarım bu sayfada bir araya geliyor. Her proje mevcut haliyle korunur; açıklamalar daha net ve profesyonel bir yapıda sunulur.</p>
+            <p class="lead">GitHub profilimdeki açık repolar bu sayfaya canlı olarak çekilir; yeni bir public repo açıldığında kartı, teknoloji etiketleri ve metrikleri otomatik oluşur. Ayrıca henüz public olmayan veya ortak yürüyen işler için ayrı bir prototip alanı da bırakıyorum.</p>
         </div>
     </section>
 
     <section class="section-block">
         <div class="section-heading">
             <div>
-                <p class="eyebrow">Proje Portföyü</p>
-                <h2>Seçili projeler</h2>
+                <p class="eyebrow">Canlı GitHub Akışı</p>
+                <h2>Açık repolar</h2>
             </div>
-            <p>Frontend, otomasyon, simülasyon ve güvenlik odağındaki üretimlerimi kısa açıklamalar ve doğrudan repo bağlantılarıyla listeliyorum.</p>
+            <p>Bu liste GitHub API üzerinden otomatik üretilir. Yeni repo, güncel izleyici sayısı, issue bilgisi ve repo içindeki teknolojiler elle ekleme gerektirmeden burada görünür.</p>
+        </div>
+
+        <div class="project-feed-head">
+            <div class="chip-cloud">
+                <span class="chip" id="projects-repo-total">Repo: ...</span>
+                <span class="chip" id="projects-tech-total">Teknoloji: ...</span>
+                <span class="chip" id="projects-last-sync">Senkron: bekleniyor</span>
+            </div>
+            <p id="projects-status" class="project-feed-status" aria-live="polite">GitHub repoları yükleniyor...</p>
+        </div>
+
+        <div id="live-projects-grid" class="projects-grid" aria-live="polite"></div>
+    </section>
+
+    <section class="section-block">
+        <div class="section-heading">
+            <div>
+                <p class="eyebrow">Özel Notlar</p>
+                <h2>Ortak ve prototip çalışmalar</h2>
+            </div>
+            <p>GitHub hesabı dışında kalan ortak geliştirmeler veya henüz public olmayan işler için ayrı bir alan tutuyorum.</p>
         </div>
 
         <div class="projects-grid">
             <article class="project-card">
                 <p class="eyebrow">Unity Simülasyon</p>
-                <h3>Gemi Simülasyonu Projesi</h3>
-                <p class="project-desc">Bir arkadaşımla birlikte Unity kullanarak geliştirdiğimiz bu proje, gemi hareketlerini ve temel simülasyon mantığını çalışır bir yapı içinde modellemeyi amaçlıyor. Uzun vadede Raspberry Pi entegrasyonu, AI ve computer vision tabanlı obstacle detection ile cybersecurity odaklı sistem tasarımını aynı mimaride birleştirmeyi hedefliyoruz.</p>
+                <h3>TestTwin | Gemi Dijital İkizi</h3>
+                <p class="project-desc">Bir arkadaşım ile birlikte geliştirdiğimiz bu proje, Unity üzerinde çalışan gemi fiziğini Python tabanlı bir control API ile birleştiren server-authoritative bir ship digital twin prototipi. Rota takibi, engelden kaçınma komutları, telemetry akışı ve vision katmanı aynı mimaride buluşuyor; YOLO entegrasyonu ise Python detector katmanı üzerinden genişletilecek şekilde kurgulanmış durumda.</p>
                 <div class="tech-stack">
                     <span class="tech-tag">Unity</span>
-                    <span class="tech-tag">Simulation</span>
-                    <span class="tech-tag">AI / CV</span>
-                    <span class="tech-tag">Raspberry Pi</span>
-                    <span class="tech-tag">Cybersecurity</span>
+                    <span class="tech-tag">Python API</span>
+                    <span class="tech-tag">Digital Twin</span>
+                    <span class="tech-tag">Computer Vision</span>
+                    <span class="tech-tag">Route Control</span>
                 </div>
-                <p class="project-status">Ortak geliştirme | Aktif çalışma</p>
-            </article>
-
-            <article class="project-card">
-                <p class="eyebrow">Frontend Konsept</p>
-                <h3>Ghost Market UI</h3>
-                <p class="project-desc">Gizlilik odaklı donanımlar satan hayali bir e-ticaret kurgusu için hazırlanmış arayüz çalışması. Mobil uyumlu sepet yapısı, dinamik akış ve koyu tema estetiği ile tasarlandı.</p>
-                <div class="tech-stack">
-                    <span class="tech-tag">HTML5</span>
-                    <span class="tech-tag">Advanced CSS</span>
-                    <span class="tech-tag">Vanilla JS</span>
-                </div>
-                <a href="https://github.com/NAKI667/ghost-market-ui" target="_blank" rel="noreferrer" class="project-link">GitHub'da İncele</a>
-            </article>
-
-            <article class="project-card">
-                <p class="eyebrow">Python Otomasyon</p>
-                <h3>Çakırın Mekanı</h3>
-                <p class="project-desc">Python tabanlı geliştirilen kullanıcı etkileşimli otomasyon ve yönetim aracı. Sistem üzerindeki süreçleri düzenleme ve optimize etme amacıyla kurgulandı.</p>
-                <div class="tech-stack">
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">Automation</span>
-                </div>
-                <a href="https://github.com/NAKI667/Python_Projelerim/blob/main/Cakirin_Mekani.py" target="_blank" rel="noreferrer" class="project-link">Kod Dosyasını Aç</a>
-            </article>
-
-            <article class="project-card">
-                <p class="eyebrow">Güvenlik Aracı</p>
-                <h3>PSM (Secure Manager)</h3>
-                <p class="project-desc">Kişisel verilerin korunması için geliştirilen şifreleme ve veri yönetimi aracı. Güvenlik yaklaşımını pratik kullanımla bir araya getiren bir çalışma olarak konumlanır.</p>
-                <div class="tech-stack">
-                    <span class="tech-tag">Security</span>
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">Cryptography</span>
-                </div>
-                <a href="https://github.com/NAKI667/PSM" target="_blank" rel="noreferrer" class="project-link">Repo'ya Git</a>
-            </article>
-
-            <article class="project-card">
-                <p class="eyebrow">Portföy Altyapısı</p>
-                <h3>NAKI Portföy (V1)</h3>
-                <p class="project-desc">Bu portföyün ilk sürümü. Çok sayfalı yapı, responsive düzen ve GitHub Pages yayın akışını bir arada tutan temel web sunumu olarak geliştirildi.</p>
-                <div class="tech-stack">
-                    <span class="tech-tag">HTML5</span>
-                    <span class="tech-tag">CSS3</span>
-                    <span class="tech-tag">Git</span>
-                </div>
-                <a href="https://github.com/NAKI667/akinkokcu.github.io" target="_blank" rel="noreferrer" class="project-link">Kaynak Kodu Gör</a>
+                <p class="project-status">Ortak geliştirme | Repo erişimi yetki gerektirebilir</p>
+                <a href="https://github.com/ardl4b/TestTwin" target="_blank" rel="noreferrer" class="project-link">Proje Repo'sunu Aç</a>
             </article>
         </div>
     </section>
@@ -187,6 +162,9 @@
         <p>&copy; 2025 Akın Kökçü | NAKI Security Systems</p>
     </div>
 </footer>
+
+<script src="js/github-data.js"></script>
+<script src="js/projects-live.js"></script>
 
 </body>
 </html>
